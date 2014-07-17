@@ -13,8 +13,8 @@ var ActivitySchema = new Schema({
 	title: String,
 	description: String,
 	address: { city: { type:String, Default:"London" }, 
-			  province:{ type:String, Default:"Ontario" },
-			  firstLine: String },
+			   province:{ type:String, Default:"Ontario" },
+			   firstLine: String },
 	Events: [EventSchema]
 });
 
