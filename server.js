@@ -3,8 +3,15 @@
 var DB_URL = "mongodb://admin:OneTech3@ds061268.mongolab.com:61268/moodidb",
 	DB_LOCAL_URL = 'mongodb://127.0.0.1:27017/develmoodidb';
 
-var restify = require('restify');
-var mongoose = require('mongoose');
+var restify = require('restify'),
+	mongoose = require('mongoose'),
+	bunyan= require('bunyan'),
+	log = bunyan.createLogger({
+  		name: 'Moodi-RESTAPI',
+  		level: process.env.LOG_LEVEL || 'info',
+ 		stream: process.stdout,
+ 		serializers: bunyan.stdSerializers
+		});
 
 // connect to the database
 var db = mongoose.connect(DB_LOCAL_URL);
@@ -14,13 +21,24 @@ mongoose.connection.once('connected', function() {
 	console.log("Connected to database");
 });
 
-var server = restify.createServer();
+
+var server = restify.createServer({
+	name: 'Moodi-RESTAPI',
+    version: '0.0.1',
+    log: log
+});
  
 server.use(restify.acceptParser(server.acceptable));
 server.use(restify.queryParser());
 server.use(restify.bodyParser());
 server.use(restify.CORS());
 
+
+server.pre(function (request, response, next) {
+    request.log.info({ req: request }, 'REQUEST');
+    //console.log(request);
+    next();
+});
 // Setup routes
 require(__dirname + '/routes.js').set(server);
 

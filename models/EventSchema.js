@@ -4,20 +4,15 @@ var mongoose = require('mongoose'),
 var EventSchema = new Schema({
 	title: String,
 	attending: Number,
+	description: String,
+	address: { 
+		city: { type: String}, 
+		province:{ type: String},
+		street: { type: String} },
 	date: Date,
 	images: [{ data: Buffer, contentType: String }],
-	status: String
+	status: String,
+	moods: [Schema.ObjectId]
 });
 
-var ActivitySchema = new Schema({
-	title: String,
-	description: String,
-	address: { city: { type:String, Default:"London" }, 
-			   province:{ type:String, Default:"Ontario" },
-			   firstLine: String },
-	Events: [EventSchema]
-});
-
-
-module.exports.Activity = mongoose.model('Activity', ActivitySchema);
-module.exports.Event = mongoose.model('Event', EventSchema);
+module.exports = mongoose.model('Event', EventSchema);
