@@ -4,7 +4,7 @@ var mongoose = require('mongoose'),
 var EventSchema = new Schema({
 	title: String,
 	attending: Number,
-	description: String,
+	desc: String,
 	address: { 
 		city: { type: String}, 
 		province:{ type: String},

@@ -23,9 +23,10 @@ exports.query = function(req, res, next){
 // returns a mood
 exports.get = function(req, res, next){
 	Mood.findById(req.params.id, function(err, mood){
-		if(err){
+		if(err || !mood){
 			console.log("no moods was found");
-			next(err);
+			res.send(204);
+			return next(err);
 		}
         mood.image = undefined;
 		res.send(200 , mood);
@@ -55,10 +56,27 @@ exports.put = function(req, res, next){
 	mood.name = _mood.name;
 	mood.altName = _mood.altName;
 	mood.status = _mood.status;
+	console.log("updated mood:");
+	console.log(mood);
 	mood.save(function(err, __mood){
 		if(err)
 			return next(err);
 		res.send(200, __mood);
+	});
+});
+};
+
+// delete resource in moods collection
+exports.delete = function(req, res, next){
+	Mood.findById(req.params.id, function(err, mood){
+		if(err)
+			return next(err);
+	
+	mood.remove(function(err, __mood){
+		if(err)
+			return next(err);
+		res.send(204);
+		return next();
 	});
 });
 };

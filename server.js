@@ -7,11 +7,11 @@ var restify = require('restify'),
 	mongoose = require('mongoose'),
 	bunyan= require('bunyan'),
 	log = bunyan.createLogger({
-  		name: 'Moodi-RESTAPI',
-  		level: process.env.LOG_LEVEL || 'info',
- 		stream: process.stdout,
- 		serializers: bunyan.stdSerializers
-		});
+  				name: 'Moodi-RESTAPI',
+  				level: process.env.LOG_LEVEL || 'info',
+ 				stream: process.stdout,
+ 				serializers: bunyan.stdSerializers
+			});
 
 // connect to the database
 var db = mongoose.connect(DB_LOCAL_URL);
@@ -32,6 +32,13 @@ server.use(restify.acceptParser(server.acceptable));
 server.use(restify.queryParser());
 server.use(restify.bodyParser());
 server.use(restify.CORS());
+server.use(
+  function crossOrigin(req,res,next){
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    return next();
+  }
+);
 
 
 server.pre(function (request, response, next) {

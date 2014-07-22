@@ -49,5 +49,28 @@ exports.put = function(req, res, next){
 			res.send(200, evnt);
 		})
 	});
-	 
 };
+
+// delete resource in event collection
+exports.delete = function(req, res, next){
+	Events.findById(req.params.id, function(err, ev){
+		if(err)
+			return next(err);
+	
+	ev.remove(function(err, __ev){
+		if(err)
+			return next(err);
+		res.send(204);
+		return next();
+	});
+});
+};
+
+// returns list of events for given mood id
+exports.concierge = function(req, res, next){
+	Events.find({'moods':{$in:[req.params.id]}}, function(err, _events){
+		if(err)
+			return next(err);
+		res.send(200, _events);
+	});
+}

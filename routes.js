@@ -10,6 +10,7 @@ exports.set = function(app) {
 	app.get('/moods', MoodController.query);
 	app.post('/moods', MoodController.post);
 	app.put('moods/:id', MoodController.put);
+	app.del('moods/:id', MoodController.delete);
 	app.get('/moods/:id/image', MoodController.getImage);
 
 	// config events routes
@@ -17,6 +18,7 @@ exports.set = function(app) {
 	app.get('/events/:id', EventController.get);
 	app.post('/events', EventController.post);
 	app.put('/events/:id', EventController.put);
-
+	app.del('/events/:id', EventController.delete);
+	app.get('/concierge/:id', EventController.concierge);
 
 };
