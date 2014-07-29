@@ -57,13 +57,13 @@ exports.delete = function(req, res, next){
 		if(err)
 			return next(err);
 	
-	ev.remove(function(err, __ev){
-		if(err)
-			return next(err);
-		res.send(204);
-		return next();
+		ev.remove(function(err, __ev){
+			if(err)
+				return next(err);
+			res.send(204);
+			return next();
+		});
 	});
-});
 };
 
 // returns list of events for given mood id

@@ -1,10 +1,13 @@
 'use strict'
 
-var MoodController = require(__dirname + '/modelControllers/MoodController.js');
-var EventController = require(__dirname + '/modelControllers/EventController.js');
+var MoodController = require('./modelControllers/MoodController.js');
+var EventController = require('./modelControllers/EventController.js');
 
 
 exports.set = function(app) {
+
+	// app.put('/token', /*restify-oauth2*/);
+
 	// config mood api
 	app.get('/moods/:id', MoodController.get);
 	app.get('/moods', MoodController.query);

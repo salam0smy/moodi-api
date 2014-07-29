@@ -8,13 +8,10 @@ exports.query = function(req, res, next){
 			console.log("no moods was found");
 			next(err);
 		}
-		//var i = 0, stop = docs.length;
-
-       // for (i; i < stop; i++) {
-        //    docs[i].image = undefined;
-      //  }
-        //Console.log(docs);
-		res.send(200 , docs);
+		res.writeHead(200, {
+            'Content-Type': 'application/json; charset=utf-8'
+        });
+		res.end(JSON.stringify(docs));
 		return next();
 	});
 	return next();

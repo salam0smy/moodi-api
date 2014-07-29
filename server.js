@@ -32,22 +32,23 @@ server.use(restify.acceptParser(server.acceptable));
 server.use(restify.queryParser());
 server.use(restify.bodyParser());
 server.use(restify.CORS());
+/*
 server.use(
   function crossOrigin(req,res,next){
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
     return next();
   }
-);
+);*/
+
 
 
 server.pre(function (request, response, next) {
     request.log.info({ req: request }, 'REQUEST');
-    //console.log(request);
     next();
 });
 // Setup routes
-require(__dirname + '/routes.js').set(server);
+require('./routes.js').set(server);
 
 server.listen(8081, function () {
     console.log("Server started @ 8081");
