@@ -1,4 +1,4 @@
-var Events = require('./models/EventSchema.js');
+var Events = require('../models/EventSchema.js');
 
 
 exports.query = function(req, res, next){

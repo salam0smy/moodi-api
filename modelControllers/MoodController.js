@@ -1,4 +1,5 @@
-var Mood = require('./models/MoodSchema.js');
+var Mood = require('../models/MoodSchema.js'),
+	fs = require('fs');
 	
 
 // returns moods in the collection
