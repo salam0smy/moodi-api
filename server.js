@@ -14,7 +14,7 @@ var restify = require('restify'),
 			});
 
 // connect to the database
-var db = mongoose.connect(DB_LOCAL_URL);
+var db = mongoose.connect(DB_URL);
 
 //attach lister to connected event
 mongoose.connection.once('connected', function() {
@@ -50,7 +50,7 @@ server.pre(function (request, response, next) {
 });
 // Setup routes
 require('./routes.js').set(server);
-
-server.listen(8081, function () {
-    console.log("Server started @ 8081");
+var port = process.env.PORT || 8081;
+server.listen(port, function () {
+    console.log("Server started @ "+ port);
 });
