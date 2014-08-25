@@ -12,7 +12,7 @@
     "restify": "latest",
     "mongoose": "latest",
     "bunyan": "~0.23.1",
-    "fs": "latest",
+    "fs": "latest"
   },
   "engines": {
     "node": "0.10.x"
