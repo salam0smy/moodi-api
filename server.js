@@ -14,7 +14,7 @@ var restify = require('restify'),
 			});
 
 // connect to the database
-var db = mongoose.connect(DB_URL);
+var db = mongoose.connect(DB_LOCAL_URL);
 
 //attach lister to connected event
 mongoose.connection.once('connected', function() {
