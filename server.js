@@ -50,7 +50,7 @@ server.pre(function (request, response, next) {
 });
 // Setup routes
 require('./routes.js').set(server);
-var port = process.env.PORT || 8081;
+var port = (process.env.NODE_ENV == 'production') ? process.env.PORT : 8081;
 server.listen(port, function () {
     console.log("Server started @ "+ port);
 });
