@@ -8,7 +8,7 @@ var restify = require('restify'),
 	bunyan= require('bunyan'),
 	log = bunyan.createLogger({
   				name: 'Moodi-RESTAPI',
-  				level: process.env.LOG_LEVEL || 'info',
+  				level: 'info',
  				stream: process.stdout,
  				serializers: bunyan.stdSerializers
 			});
