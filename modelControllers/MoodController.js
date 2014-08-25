@@ -9,10 +9,10 @@ exports.query = function(req, res, next){
 			console.log("no moods was found");
 			next(err);
 		}
-		res.writeHead(200, {
-            'Content-Type': 'application/json; charset=utf-8'
-        });
-		res.end(JSON.stringify(docs));
+		for (var i = docs.length - 1; i >= 0; i--) {
+			docs[i].image = undefined;
+		};
+		res.send(200, docs);
 		return next();
 	});
 	return next();
@@ -70,13 +70,13 @@ exports.delete = function(req, res, next){
 		if(err)
 			return next(err);
 	
-	mood.remove(function(err, __mood){
-		if(err)
-			return next(err);
-		res.send(204);
-		return next();
+		mood.remove(function(err, __mood){
+			if(err)
+				return next(err);
+			res.send(204);
+			return next();
+		});
 	});
-});
 };
 
 
@@ -86,17 +86,32 @@ exports.getImage = function(req, res, next){
 	Mood.findById(req.params.id, function(err, mood){
 		if(err)
 			return next(err);
-		res.contentType(mood.image.contentType);
-        res.send(mood.image.data);
+	
+		res.writeHead(200,{
+			'Content-Type': mood.image.contentType
+		});
+        res.write(mood.image.data);
+        res.end();
 	});
 };
 
 // upload image to given mood id
 exports.putImage = function(req, res, next){
+	console.log("file is");
+		console.log(req.files.file.name);
+		console.log(req.files.file.path);
+	console.log(req.params.id);
+
 	Mood.findById(req.params.id, function(err, mood){
 		if(err)
 			return next(err);
-		// TODO: complete implamenting upload image
+		mood.image.data = fs.readFileSync(req.files.file.path);
+		mood.image.contentType = req.files.file.type;
+		mood.save(function(err, __mood){
+			if(err)
+				return next(err);
+			res.send(__mood);
+		});
 	});
 }
 

@@ -15,6 +15,7 @@ exports.set = function(app) {
 	app.put('moods/:id', MoodController.put);
 	app.del('moods/:id', MoodController.delete);
 	app.get('/moods/:id/image', MoodController.getImage);
+	app.post('/moods/:id/image', MoodController.putImage);
 
 	// config events routes
 	app.get('/events', EventController.query);
@@ -23,5 +24,6 @@ exports.set = function(app) {
 	app.put('/events/:id', EventController.put);
 	app.del('/events/:id', EventController.delete);
 	app.get('/concierge/:id', EventController.concierge);
-
+	app.get('/events/:id/image/:img_id', EventController.getImage);
+	app.post('/events/:id/image', EventController.putImage);
 };

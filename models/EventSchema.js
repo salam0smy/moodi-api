@@ -6,6 +6,7 @@ var EventSchema = new Schema({
 	attending: Number,
 	desc: String,
 	address: { 
+		name: { type: String},
 		city: { type: String}, 
 		province:{ type: String},
 		street: { type: String} },

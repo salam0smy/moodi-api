@@ -4,7 +4,7 @@ var mongoose = require('mongoose'),
 var MoodSchema = new Schema({
 	name: String,
 	altName: String,
-	status: {type:String, Default:"draft"},
+	status: String,
 	image: { data: Buffer, contentType: String }
 });
 
