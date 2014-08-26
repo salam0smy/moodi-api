@@ -1,4 +1,4 @@
-'use strict'
+
 
 var DB_URL = "mongodb://admin:OneTech3@ds061268.mongolab.com:61268/moodidb",
 	DB_LOCAL_URL = 'mongodb://127.0.0.1:27017/develmoodidb';
