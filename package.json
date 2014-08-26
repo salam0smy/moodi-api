@@ -1,21 +1,21 @@
 {
   "name": "moodiRESTAPI",
   "version": "0.0.1",
-  "description": "Rest api for moodi database",
+  "description": "Moodi Resful API",
   "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "OneTech3 - Salam Alyahya",
-  "license": "BSD-2-Clause",
   "dependencies": {
-    "restify": "latest",
-    "mongoose": "latest",
     "bunyan": "~0.23.1",
-    "fs": "latest",
-    "passport-local-mongoose": "latest"
+    "mongoose": "~3.8.13",
+    "passport": "~0.2.0",
+    "passport-local": "~1.0.0",
+    "passport-local-mongoose": "~0.3.0",
+    "restify": "~2.8.1"
   },
-  "engines": {
-    "node": "0.10.x"
-  }
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Salam Alyahya",
+  "license": "BSD-2-Clause"
 }
