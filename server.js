@@ -4,14 +4,7 @@ var DB_URL = "mongodb://admin:OneTech3@ds061268.mongolab.com:61268/moodidb",
 	DB_LOCAL_URL = 'mongodb://127.0.0.1:27017/develmoodidb';
 
 var restify = require('restify'),
-	mongoose = require('mongoose'),
-	bunyan= require('bunyan'),
-	log = bunyan.createLogger({
-  				name: 'Moodi-RESTAPI',
-  				level: 'info',
- 				stream: process.stdout,
- 				serializers: bunyan.stdSerializers
-			});
+	mongoose = require('mongoose');
 
 // connect to the database
 var db = mongoose.connect(DB_LOCAL_URL);
@@ -24,8 +17,7 @@ mongoose.connection.once('connected', function() {
 
 var server = restify.createServer({
 	name: 'Moodi-RESTAPI',
-    version: '0.0.1',
-    log: log
+    version: '0.0.1'
 });
  
 server.use(restify.acceptParser(server.acceptable));
