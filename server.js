@@ -1,6 +1,6 @@
+'use strict'
 
-
-var DB_URL = "mongodb://admin:OneTech3@ds061268.mongolab.com:61268/moodidb",
+var DB_URL = "mongodb://user:pass@ds061268.mongolab.com:61268/moodidb",
 	DB_LOCAL_URL = 'mongodb://127.0.0.1:27017/develmoodidb';
 
 var restify = require('restify'),
@@ -17,23 +17,13 @@ mongoose.connection.once('connected', function() {
 
 var server = restify.createServer({
 	name: 'Moodi-RESTAPI',
-    version: '0.0.1'
+    version: '0.0.2'
 });
  
 server.use(restify.acceptParser(server.acceptable));
 server.use(restify.queryParser());
 server.use(restify.bodyParser());
 server.use(restify.CORS());
-
-/*
-server.use(
-  function crossOrigin(req,res,next){
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    return next();
-  }
-);*/
-
 
 
 server.pre(function (request, response, next) {
@@ -42,6 +32,7 @@ server.pre(function (request, response, next) {
 });
 // Setup routes
 require('./routes.js').set(server);
+
 var port = (process.env.NODE_ENV == 'production') ? process.env.PORT : 8081;
 server.listen(port, function () {
     console.log("Server started @ "+ port);
